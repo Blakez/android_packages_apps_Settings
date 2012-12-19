@@ -41,6 +41,14 @@ import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.cm.QSConstants.TILE_DESKTOPMODE;
 import static com.android.internal.util.cm.QSConstants.TILE_QUIETHOURS;
 
+import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.R;
+
+import android.content.Context;
+import android.net.wimax.WimaxHelper;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -122,6 +130,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_DESKTOPMODE, new QuickSettingsUtil.TileInfo(
                 TILE_DESKTOPMODE, R.string.title_tile_desktop_mode,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop"));
+        TILES.put(TILE_NETWORKMODE, new QuickSettingsUtil.TileInfo(
+                TILE_NETWORKMODE, R.string.title_tile_networkmode,
+                "com.android.systemui:drawable/ic_qs_2g3g_on"));
     }
 
     public static String getCurrentTiles(Context context) {
