@@ -39,6 +39,7 @@ import static com.android.internal.util.cm.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.cm.QSConstants.TILE_WIFI;
 import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.cm.QSConstants.TILE_DESKTOPMODE;
+import static com.android.internal.util.cm.QSConstants.TILE_QUIETHOURS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,6 +86,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_NFC, new QuickSettingsUtil.TileInfo(
                 TILE_NFC, R.string.title_tile_nfc,
                 "com.android.systemui:drawable/ic_qs_nfc_off"));
+        TILES.put(TILE_QUIETHOURS, new QuickSettingsUtil.TileInfo(
+                TILE_QUIETHOURS, R.string.title_tile_quiet_hours,
+                "com.android.systemui:drawable/ic_qs_quiet_hours_off"));       
         TILES.put(TILE_SETTINGS, new QuickSettingsUtil.TileInfo(
                 TILE_SETTINGS, R.string.title_tile_settings,
                 "com.android.systemui:drawable/ic_qs_settings"));
