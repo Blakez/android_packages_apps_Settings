@@ -52,6 +52,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private static final String PIE_LASTAPP = "pie_lastapp";
     private static final String PIE_CENTER = "pie_center";
     private static final String PIE_STICK = "pie_stick";
+    private static final String PIE_RESTART = "pie_restart_launcher";
 
     private ListPreference mStatusBarMaxNotif;
     private ListPreference mPieMode;
@@ -64,6 +65,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private CheckBoxPreference mPieMenu;
     private CheckBoxPreference mPieSearch;
     private CheckBoxPreference mPieLastApp;
+    private CheckBoxPreference mPieRestart;
     private CheckBoxPreference mPieCenter;
     private CheckBoxPreference mPieStick;
     private PreferenceScreen mNavigationBarControls;
@@ -91,6 +93,10 @@ public class Toolbar extends SettingsPreferenceFragment
         mPieLastApp = (CheckBoxPreference) prefSet.findPreference(PIE_LASTAPP);
 		mPieLastApp.setChecked(Settings.System.getInt(mContext.getContentResolver(),
 				Settings.System.PIE_LAST_APP, 0) == 1);
+				
+		mPieRestart = (CheckBoxPreference) prefSet.findPreference(PIE_RESTART);	
+        mPieRestart.setChecked(Settings.System.getInt(mContext.getContentResolver(),	
+                Settings.System.EXPANDED_DESKTOP_RESTART_LAUNCHER, 1) == 1);
 
         mPieCenter = (CheckBoxPreference) prefSet.findPreference(PIE_CENTER);
         mPieCenter.setChecked(Settings.System.getInt(mContext.getContentResolver(),
@@ -189,6 +195,9 @@ public class Toolbar extends SettingsPreferenceFragment
         } else if (preference == mPieCenter) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_CENTER, mPieCenter.isChecked() ? 1 : 0);
+        } else if (preference == mPieRestart) {	
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),	
+                    Settings.System.EXPANDED_DESKTOP_RESTART_LAUNCHER, mPieRestart.isChecked() ? 1 : 0);
         } else if (preference == mPieStick) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_STICK, mPieStick.isChecked() ? 1 : 0);
