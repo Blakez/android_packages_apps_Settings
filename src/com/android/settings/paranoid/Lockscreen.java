@@ -26,7 +26,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -40,7 +39,6 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.view.Display;
 import android.view.Window;
 import android.widget.Toast;
@@ -64,15 +62,11 @@ public class Lockscreen extends SettingsPreferenceFragment
     private static final String KEY_BACKGROUND = "lockscreen_background";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_SCREEN_SECURITY = "screen_security";
-    private static final String PREF_POWER_CRT_SCREEN_ON = "system_power_crt_screen_on";
-	private static final String PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
 
     private ListPreference mCustomBackground;
 
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mHomeScreenWidgets;
-    private CheckBoxPreference mCrtOff;
-	private CheckBoxPreference mCrtOn;
 
     private Context mContext;
 
@@ -85,12 +79,9 @@ public class Lockscreen extends SettingsPreferenceFragment
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
     }
 
-	private boolean isCrtOffChecked = false;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = getActivity();
 
         addPreferencesFromResource(R.xml.lock_screen_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
@@ -120,23 +111,6 @@ public class Lockscreen extends SettingsPreferenceFragment
             prefScreen.removePreference(findPreference(KEY_HOME_SCREEN_WIDGETS));
             prefScreen.removePreference(findPreference(KEY_LOCKSCREEN_BUTTONS));
         }
-
-		// use this to enable/disable crt on feature
-        // crt only works if crt off is enabled
-        // total system failure if only crt on is enabled
-        isCrtOffChecked = Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
-                electronBeamFadesConfig ? 0 : 1) == 1;
-
-        mCrtOff = (CheckBoxPreference) findPreference(PREF_POWER_CRT_SCREEN_OFF);
-        mCrtOff.setChecked(isCrtOffChecked);
-        mCrtOff.setOnPreferenceChangeListener(this);
-
-        mCrtOn = (CheckBoxPreference) findPreference(PREF_POWER_CRT_SCREEN_ON);
-        mCrtOn.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SYSTEM_POWER_ENABLE_CRT_ON, 0) == 1);
-        mCrtOn.setEnabled(isCrtOffChecked);
-        mCrtOn.setOnPreferenceChangeListener(this);
 
         // This applies to all users
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND);
@@ -309,30 +283,6 @@ public class Lockscreen extends SettingsPreferenceFragment
             return true;
         }
 
-        return false;
-    }
-    
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final String key = preference.getKey();
-         if (mCrtOff.equals(preference)) {
-            isCrtOffChecked = ((Boolean) newValue).booleanValue();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
-                    (isCrtOffChecked ? 1 : 0));
-            // if crt off gets turned off, crt on gets turned off and disabled
-            if (!isCrtOffChecked) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.SYSTEM_POWER_ENABLE_CRT_ON, 0);
-                mCrtOn.setChecked(false);
-            }
-            mCrtOn.setEnabled(isCrtOffChecked);
-            return true;
-        } else if (mCrtOn.equals(preference)) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SYSTEM_POWER_ENABLE_CRT_ON,
-                    ((Boolean) newValue).booleanValue() ? 1 : 0);
-            return true;
-        }
         return false;
     }
 }
