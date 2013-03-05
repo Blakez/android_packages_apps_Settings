@@ -49,6 +49,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private static final String PIE_GAP = "pie_gap";
     private static final String PIE_MENU = "pie_menu";
     private static final String PIE_SEARCH = "pie_search";
+    private static final String PIE_LASTAPP = "pie_lastapp";
     private static final String PIE_CENTER = "pie_center";
     private static final String PIE_STICK = "pie_stick";
 
@@ -62,6 +63,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private CheckBoxPreference mPieMenu;
     private CheckBoxPreference mPieSearch;
+    private CheckBoxPreference mPieLastApp;
     private CheckBoxPreference mPieCenter;
     private CheckBoxPreference mPieStick;
     private PreferenceScreen mNavigationBarControls;
@@ -85,6 +87,10 @@ public class Toolbar extends SettingsPreferenceFragment
         mPieSearch = (CheckBoxPreference) prefSet.findPreference(PIE_SEARCH);
         mPieSearch.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_SEARCH, 1) == 1);
+                
+        mPieLastApp = (CheckBoxPreference) prefSet.findPreference(PIE_LASTAPP);
+		mPieLastApp.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+				Settings.System.PIE_LAST_APP, 0) == 1);
 
         mPieCenter = (CheckBoxPreference) prefSet.findPreference(PIE_CENTER);
         mPieCenter.setChecked(Settings.System.getInt(mContext.getContentResolver(),
@@ -177,6 +183,9 @@ public class Toolbar extends SettingsPreferenceFragment
         } else if (preference == mPieSearch) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_SEARCH, mPieSearch.isChecked() ? 1 : 0);
+        } else if (preference == mPieLastApp) {
+			Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+					Settings.System.PIE_LAST_APP, mPieLastApp.isChecked() ? 1 : 0);
         } else if (preference == mPieCenter) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_CENTER, mPieCenter.isChecked() ? 1 : 0);
