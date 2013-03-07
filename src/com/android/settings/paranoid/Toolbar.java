@@ -42,6 +42,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
     private static final String NAV_BAR_CATEGORY = "toolbar_navigation";
     private static final String NAV_BAR_CONTROLS = "navigation_bar_controls";
+    private static final String KEY_CIRCLE_BATTERY = "circle_battery";
     private static final String PIE_GRAVITY = "pie_gravity";
     private static final String PIE_MODE = "pie_mode";
     private static final String PIE_SIZE = "pie_size";
@@ -70,6 +71,7 @@ public class Toolbar extends SettingsPreferenceFragment
     private CheckBoxPreference mPieStick;
     private PreferenceScreen mNavigationBarControls;
     private PreferenceCategory mNavigationCategory;
+    private CheckBoxPreference mCircleBattery;
 
     private Context mContext;
     private int mAllowedLocations;
@@ -105,6 +107,10 @@ public class Toolbar extends SettingsPreferenceFragment
         mPieStick = (CheckBoxPreference) prefSet.findPreference(PIE_STICK);
         mPieStick.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_STICK, 1) == 1);
+        
+        mCircleBattery = (CheckBoxPreference) prefSet.findPreference(KEY_CIRCLE_BATTERY);	
+        mCircleBattery.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CIRCLE_BATTERY, 0) == 1);
 
         mStatusBarMaxNotif = (ListPreference) prefSet.findPreference(STATUS_BAR_MAX_NOTIF);
         int maxNotIcons = Settings.System.getInt(mContext.getContentResolver(),
@@ -183,6 +189,9 @@ public class Toolbar extends SettingsPreferenceFragment
                     Settings.System.STATUS_BAR_DONOTDISTURB,
                     mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mCircleBattery) {
+            Settings.System.putInt(mContext.getContentResolver(),	
+                    Settings.System.STATUS_BAR_CIRCLE_BATTERY, mCircleBattery.isChecked() ? 1 : 0);
         } else if (preference == mPieMenu) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_MENU, mPieMenu.isChecked() ? 1 : 0);

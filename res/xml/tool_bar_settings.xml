@@ -39,6 +39,10 @@
             android:title="@string/status_bar_donotdisturb_title"
             android:summary="@string/status_bar_donotdisturb_summary"
             android:defaultValue="false" />
+            
+        <CheckBoxPreference
+            android:key="circle_battery"
+            android:title="@string/circle_battery_title" />
 
     </PreferenceCategory>
 
