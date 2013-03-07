@@ -5263,6 +5263,4 @@
     <string name="developer_version_default">thebz1</string>
     <string name="update_settings_title">Update Center</string>
     <string name="pk_version">ParanoidKANGdroid version</string>
-    
-    <string name="superuser">Superuser</string>
 </resources>
