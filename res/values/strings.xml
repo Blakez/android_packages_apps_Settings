@@ -5265,5 +5265,6 @@
     <string name="pk_version">ParanoidKANGdroid version</string>
     
     <!-- Circle battery -->
-    <string name="circle_battery_title">Circle battery</string>
+    <string name="circle_battery_title">CyanogenMod Circle Battery</string>
+    <string name="circle_battery_summary">Make sure that you hide the battery icon under ROM Control before you enable this.</string>
 </resources>
