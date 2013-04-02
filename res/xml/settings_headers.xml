@@ -68,6 +68,13 @@
         android:title="@string/launcher_settings_title"
         android:icon="@drawable/ic_settings_cmlauncher" />
         
+    <!-- System -->
+    <header
+        android:id="@+id/system_settings"
+        android:icon="@drawable/ic_settings_system"
+        android:fragment="com.android.settings.cyanogenmod.SystemSettings"
+        android:title="@string/system_settings_title" />
+  
     <!-- ROM Control -->
     <header android:id="@+id/rom_control"
             android:title="@string/rom_control_title"
@@ -77,13 +84,6 @@
                 android:targetClass="com.aokp.romcontrol.ROMControlActivity"
                 android:targetPackage="com.aokp.romcontrol" />
     </header>
-
-    <!-- System -->
-    <header
-        android:id="@+id/system_settings"
-        android:icon="@drawable/ic_settings_system"
-        android:fragment="com.android.settings.cyanogenmod.SystemSettings"
-        android:title="@string/system_settings_title" />
         
 	<!-- Hybrid options -->
     <header

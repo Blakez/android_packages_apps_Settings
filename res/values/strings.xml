@@ -4519,7 +4519,7 @@
     <string name="status_bar_donotdisturb_summary">Disable ticker animation for incoming notifications</string>
 
     <!-- Quick settings panel  -->
-    <string name="quick_settings_panel_title">Quick Settings panel</string>
+    <string name="quick_settings_panel_title">Quick Settings Panel</string>
     <string name="quick_settings_title">Quick Settings</string>
     <string name="title_static_tiles">Static tiles</string>
     <string name="tile_picker_title">Tiles and layout</string>
@@ -4714,6 +4714,9 @@
 
     <!-- Notification Drawer  -->
     <string name="notification_drawer_title">Notification drawer</string>
+    
+    <!-- PIE Controls  -->
+    <string name="pie_control_settings">PIE Settings</string>
 
     <!-- Lock Screen Shortcuts -->
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
