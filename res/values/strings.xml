@@ -5404,4 +5404,7 @@
     <string name="developer_version_default">thebz1</string>
     <string name="update_settings_title">Update Center</string>
     <string name="pk_version">ParanoidKANGdroid version</string>
+    
+    <!-- TRDS Settings -->
+    <string name="trds_settings_title">Dark UI</string>
 </resources>
