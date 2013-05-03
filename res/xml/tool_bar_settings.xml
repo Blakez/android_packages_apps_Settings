@@ -43,8 +43,7 @@
             
         <CheckBoxPreference
             android:key="circle_battery"
-            android:title="@string/circle_battery_title"
-            android:summary="@string/circle_battery_summary" />
+            android:title="@string/circle_battery_title" />
 
     </PreferenceCategory>
 
