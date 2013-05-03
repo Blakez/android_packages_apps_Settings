@@ -44,7 +44,6 @@ public class Toolbar extends SettingsPreferenceFragment
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
     private static final String NAV_BAR_CATEGORY = "toolbar_navigation";
     private static final String NAV_BAR_CONTROLS = "navigation_bar_controls";
-    private static final String KEY_CIRCLE_BATTERY = "circle_battery";
 
     private ListPreference mStatusBarMaxNotif;
     private CheckBoxPreference mQuickPullDown;
@@ -52,7 +51,6 @@ public class Toolbar extends SettingsPreferenceFragment
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private PreferenceScreen mNavigationBarControls;
     private PreferenceCategory mNavigationCategory;
-    private CheckBoxPreference mCircleBattery;
 
     private Context mContext;
     private int mAllowedLocations;
@@ -68,10 +66,6 @@ public class Toolbar extends SettingsPreferenceFragment
         mQuickPullDown = (CheckBoxPreference) prefSet.findPreference(KEY_QUICK_PULL_DOWN);
         mQuickPullDown.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.QS_QUICK_PULLDOWN, 0) == 1);
-        
-        mCircleBattery = (CheckBoxPreference) prefSet.findPreference(KEY_CIRCLE_BATTERY);	
-        mCircleBattery.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_CIRCLE_BATTERY, 0) == 1);
 
         mStatusBarMaxNotif = (ListPreference) prefSet.findPreference(STATUS_BAR_MAX_NOTIF);
         int maxNotIcons = Settings.System.getInt(mContext.getContentResolver(),
@@ -114,9 +108,6 @@ public class Toolbar extends SettingsPreferenceFragment
                     Settings.System.STATUS_BAR_DONOTDISTURB,
                     mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
             return true;
-        } else if (preference == mCircleBattery) {
-            Settings.System.putInt(mContext.getContentResolver(),	
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY, mCircleBattery.isChecked() ? 1 : 0);
         } 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
